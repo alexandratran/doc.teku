@@ -651,8 +651,6 @@ ee-endpoint: "http://localhost:8550"
 </Tabs>
 
 The URL of the [execution client's](../../concepts/node-types.md#execution-clients) Engine JSON-RPC APIs.
-This replaces [`eth1-endpoint`](#eth1-endpoint-eth1-endpoints) after
-[The Merge](../../concepts/node-types.md).
 
 ### `ee-jwt-claim-id`
 
@@ -768,97 +766,6 @@ The deposit contract address can also be defined in:
 
 - The genesis file specified using [`--initial-state`](#initial-state)
 - The predefined network supplied using [`--network`](#network).
-
-### `eth1-deposit-contract-max-request-size`
-
-<Tabs>
-  <TabItem value="Syntax" label="Syntax" default>
-
-```bash
---eth1-deposit-contract-max-request-size=<INTEGER>
-```
-
-  </TabItem>
-  <TabItem value="Example" label="Example" >
-
-```bash
---eth1-deposit-contract-max-request-size=8000
-```
-
-  </TabItem>
-  <TabItem value="Environment variable" label="Environment variable" >
-
-```bash
-TEKU_ETH1_DEPOSIT_CONTRACT_MAX_REQUEST_SIZE=8000
-```
-
-  </TabItem>
-  <TabItem value="Configuration file" label="Configuration file" >
-
-```bash
-eth1-deposit-contract-max-request-size: 8000
-```
-
-  </TabItem>
-</Tabs>
-
-The maximum number of blocks to request deposit contract event logs for in a single request.
-The default is `10000`.
-
-Setting a smaller max size may help if your execution layer client is slow at loading deposit event
-logs, or when receiving warnings that the execution layer client is unavailable.
-
-### `eth1-endpoint`, `eth1-endpoints`
-
-<Tabs>
-  <TabItem value="Syntax" label="Syntax" default>
-
-```bash
---eth1-endpoint=<URL>[,<URL>...]...
-```
-
-  </TabItem>
-  <TabItem value="Example" label="Example" >
-
-```bash
---eth1-endpoint=http://localhost:8545,https://mainnet.infura.io/v3/d0e21ccd0b1e4eef7784422eabc51111
-```
-
-  </TabItem>
-  <TabItem value="Environment variable" label="Environment variable" >
-
-```bash
-TEKU_ETH1_ENDPOINT=http://localhost:8545,https://mainnet.infura.io/v3/d0e21ccd0b1e4eef7784422eabc51111
-```
-
-  </TabItem>
-  <TabItem value="Configuration file" label="Configuration file" >
-
-```bash
-eth1-endpoint: ["http://localhost:8545","https://mainnet.infura.io/v3/d0e21ccd0b1e4eef7784422eabc51111"]
-```
-
-  </TabItem>
-</Tabs>
-
-A comma-separated list of JSON-RPC URLs of execution layer clients.
-Each time Teku makes a call, it finds the first provider in the list that is available, on the right
-chain, and in sync.
-This option must be specified if running a validator.
-
-If not specified (that is, you're running a beacon node only), then provide an initial state using
-the [`--initial-state`](#initial-state) option, or start Teku from an existing database using
-[`--data-path`](#data-base-path-data-path), which provides the initial state to work from.
-You do not need to provide an initial state if running a public network which has already started
-(for example, Mainnet or Hoodi).
-
-:::caution
-
-After [The Merge](../../concepts/node-types.md), you can't use `eth1-endpoint` to specify an
-external execution layer provider.
-This option is replaced by [`ee-endpoint`](#ee-endpoint) for each beacon node.
-
-:::
 
 ### `exchange-capabilities-monitoring-enabled`
 
